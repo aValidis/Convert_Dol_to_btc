@@ -1,18 +1,17 @@
-const USDviuw = document.querySelector('.usd')
-const usdInRub = document.querySelector('.usd-in-btc')
-const usdInput = document.querySelector('.usd-input')
+const rateInput = document.getElementById('rate');
+const sumInput = document.getElementById('sum');
+const resultElement = document.getElementById('result');
 
-const valute = {
-        USD: "21000"
+rateInput.addEventListener('change', recalculate);
+sumInput.addEventListener('change', recalculate);
+
+function recalculate(){
+		resultElement.textContent = convert(rateInput.value, sumInput.value);
 }
 
-usdInput.addEventListener('change', () => {
-    if (!Number.isInteger(+usdInput.value)) {
-        usdInRub.textContent = "Вы ввели не число"
-    } else if (usdInput.value === '') {
-        usdInRub.textContent = 0
-    } else {
-        usdInRub.textContent = Math.round(+usdInput.value * valute.USD) + " BTC"
-    }
-})
+function convert(rate, sum) {
+	if(rate == 0) return '?';
+  
+  return (sum / rate).toFixed(7);
+}
 
